@@ -34,16 +34,16 @@ BmpInfoHeader readInfoHeader(std::ifstream& in) {
     return infoHeader;
 }
 
-void writeInfoHeader(BmpInfoHeader header, std::ofstream& out) {
-    out.write((char*)&header.biSize, 4);
-    out.write((char*)&header.biWidth, 4);
-    out.write((char*)&header.biHeight, 4);
-    out.write((char*)&header.biPlanes, 2);
-    out.write((char*)&header.biBitCount, 2);
-    out.write((char*)&header.biCompression, 4);
-    out.write((char*)&header.biSizeImage, 4);
-    out.write((char*)&header.biXPelsPerMeter, 4);
-    out.write((char*)&header.biYPelsPerMeter, 4);
-    out.write((char*)&header.biClrUsed, 4);
-    out.write((char*)&header.biClrImportant, 4);
+void writeInfoHeader(BmpInfoHeader infoHeader, std::ofstream& out) {
+    out.write((char*)&infoHeader.biSize, sizeof(infoHeader.biSize));
+    out.write((char*)&infoHeader.biWidth, sizeof(infoHeader.biWidth));
+    out.write((char*)&infoHeader.biHeight, sizeof(infoHeader.biHeight));
+    out.write((char*)&infoHeader.biPlanes, sizeof(infoHeader.biPlanes));
+    out.write((char*)&infoHeader.biBitCount, sizeof(infoHeader.biBitCount));
+    out.write((char*)&infoHeader.biCompression, sizeof(infoHeader.biCompression));
+    out.write((char*)&infoHeader.biSizeImage, sizeof(infoHeader.biSizeImage));
+    out.write((char*)&infoHeader.biXPelsPerMeter, sizeof(infoHeader.biXPelsPerMeter));
+    out.write((char*)&infoHeader.biYPelsPerMeter, sizeof(infoHeader.biYPelsPerMeter));
+    out.write((char*)&infoHeader.biClrUsed, sizeof(infoHeader.biClrUsed));
+    out.write((char*)&infoHeader.biClrImportant, sizeof(infoHeader.biClrImportant));
 }

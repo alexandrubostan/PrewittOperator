@@ -29,10 +29,10 @@ BmpFileHeader readFileHeader(std::ifstream& in) {
     return fileHeader;
 }
 
-void writeFileHeader(BmpFileHeader header, std::ofstream& out) {
-    out.write((char*)&header.bfType1, 1);
-    out.write((char*)&header.bfType2, 1);
-    out.write((char*)&header.bfSize, 4);
-    out.write((char*)&header.bfReserved, 4);
-    out.write((char*)&header.bfOffBits, 4);
+void writeFileHeader(BmpFileHeader fileHeader, std::ofstream& out) {
+    out.write((char*)&fileHeader.bfType1, sizeof(fileHeader.bfType1));
+    out.write((char*)&fileHeader.bfType2, sizeof(fileHeader.bfType2));
+    out.write((char*)&fileHeader.bfSize, sizeof(fileHeader.bfSize));
+    out.write((char*)&fileHeader.bfReserved, sizeof(fileHeader.bfReserved));
+    out.write((char*)&fileHeader.bfOffBits, sizeof(fileHeader.bfOffBits));
 }
