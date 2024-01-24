@@ -8,7 +8,7 @@ PixelArray grayscale(std::ifstream& in, int height, int width) {
     PixelArray pxArray(height, std::vector<Pixel>(width));
 
     uint8_t padding = (4 - (width * 3) % 4) % 4;
-    uint8_t buffer;
+    uint8_t buffer = 0;
     double gray;
 
     for (int i = height - 1; i >= 0; i--) {

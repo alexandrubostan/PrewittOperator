@@ -3,10 +3,10 @@
 #include <fstream>
 
 BmpInfoHeader readInfoHeader(std::ifstream& in) {
-    BmpInfoHeader infoHeader;
+    BmpInfoHeader infoHeader{};
 
-    uint16_t buffer2;
-    uint32_t buffer3;
+    uint16_t buffer2 = 0;
+    uint32_t buffer3 = 0;
 
     in.read((char*)&buffer3, sizeof(buffer3));
     infoHeader.biSize = buffer3;

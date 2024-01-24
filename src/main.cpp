@@ -1,6 +1,6 @@
-#include "../include/pixel.h"
 #include "../include/bmpfileheader.h"
 #include "../include/bmpinfoheader.h"
+#include "../include/pixel.h"
 #include "../include/prewitt.h"
 
 #include <cmath>
@@ -8,7 +8,8 @@
 #include <iostream>
 #include <string>
 
-void writeFile(BmpFileHeader fileHeader, BmpInfoHeader infoHeader, PixelArray pxArray, std::string s) {
+static void
+writeFile(BmpFileHeader fileHeader, BmpInfoHeader infoHeader, PixelArray pxArray, std::string s) {
     std::ofstream out(s, std::ios::binary);
     if (!out) {
         std::cerr << "Cannot create file. Make sure the output folder is created.\n";
@@ -18,7 +19,7 @@ void writeFile(BmpFileHeader fileHeader, BmpInfoHeader infoHeader, PixelArray px
     writeFileHeader(fileHeader, out);
     writeInfoHeader(infoHeader, out);
 
-    uint8_t padding = (4 - (infoHeader.biWidth*3) % 4) % 4;
+    uint8_t padding = (4 - (infoHeader.biWidth * 3) % 4) % 4;
 
     for (int i = infoHeader.biHeight - 1; i >= 0; i--) {
         for (int j = 0; j < infoHeader.biWidth; j++) {
@@ -34,7 +35,8 @@ void writeFile(BmpFileHeader fileHeader, BmpInfoHeader infoHeader, PixelArray px
 
 int main(int argc, char** argv) {
     if (argc == 1) {
-        std::cerr << "Give the file name as an argument. The file needs to be in the input folder.\n";
+        std::cerr
+            << "Give the file name as an argument. The file needs to be in the input folder.\n";
         return 1;
     } else if (argc != 2) {
         std::cerr << "Only 1 file name.\n";
@@ -55,7 +57,7 @@ int main(int argc, char** argv) {
 
     PixelArray pxArray = grayscale(in, infoHeader.biHeight, infoHeader.biWidth);
 
-    //writeFile(fileHeader, infoHeader, pxArray, "./output/Grayscale.bmp");
+    // writeFile(fileHeader, infoHeader, pxArray, "./output/Grayscale.bmp");
 
     infoHeader.biHeight -= 2;
     infoHeader.biWidth -= 2;
@@ -73,5 +75,6 @@ int main(int argc, char** argv) {
     writeFile(fileHeader, infoHeader, GX, "./output/GX.bmp");
     writeFile(fileHeader, infoHeader, GY, "./output/GY.bmp");
     writeFile(fileHeader, infoHeader, G, "./output/G.bmp");
+    std::cout << "Done.\n";
     return 0;
 }
